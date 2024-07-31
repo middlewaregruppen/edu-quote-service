@@ -25,10 +25,10 @@ docker run -d -p 6565:6565 -e GRPC_ENABLED=true $IMAGE_NAME    #<4>
 
 ---
 
-<1> Build an image.
-<2> Push an image to Docker Hub.
-<3> Run microservice app locally.
-<4> Run gRPC service locally.
+1. Build an image.
+2. Push an image to Docker Hub.
+3. Run microservice app locally.
+4. Run gRPC service locally.
 
 ## Deploying the Application to Kubernetes
 
