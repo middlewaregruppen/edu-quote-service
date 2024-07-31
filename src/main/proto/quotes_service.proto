@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package se.vgregion.k8s.quotes;
+
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "se.vgregion.k8s.quotes";
+
+service QuoteService {
+
+  rpc GetQuote(google.protobuf.Empty) returns (QuoteMessage) ;
+  
+  rpc GetQuoteStream(google.protobuf.Empty) returns (stream QuoteMessage) ;
+
+}
+
+message QuoteMessage{
+  string message = 1;
+}

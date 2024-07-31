@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hitchhikers-quote-service
+  annotations:
+    app.dekorate.io/vcs-url: <<unknown>>
+  labels:
+    app.kubernetes.io/version: 0.0.1
+    app.kubernetes.io/name: hitchhikers-quote-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/version: 0.0.1
+      app.kubernetes.io/name: hitchhikers-quote-service
+  template:
+    metadata:
+      annotations:
+        app.dekorate.io/vcs-url: <<unknown>>
+      labels:
+        app.kubernetes.io/version: 0.0.1
+        app.kubernetes.io/name: hitchhikers-quote-service
+    spec:
+      containers:
+        - name: hitchhikers-quote-service
+          image: harbor.vgregion.se/education/quotes-service:0.0.1-johro35
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          ports:
+            - containerPort: 8080
+              name: web
+              protocol: TCP
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: QUOTE_SERVICE
+              value: HITCHHIKER
