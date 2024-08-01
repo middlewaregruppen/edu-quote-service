@@ -1,6 +1,7 @@
 package se.vgregion.k8s.quotes.rest;
 
 import se.vgregion.k8s.quotes.common.QuoteService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuoteService {
 
-  @Value("${QUOTE_SERVICE:HITCHHIKER}")
+  @Value("${QUOTE_SERVICE:hitchhiker}")
   private String quoteConfig;
 
   private final Faker faker;
@@ -20,19 +20,19 @@ public class QuoteService {
     final String quote;
 
     switch (quoteConfig.toUpperCase()) {
-      case "CHUCK":
+      case "chuck":
         quote = faker.chuckNorris().fact();
         break;
-      case "HOBBIT":
+      case "hobbit":
         quote = faker.hobbit().quote();
         break;
-      case "HITCHHIKER":
+      case "hitchhiker":
         quote = faker.hitchhikersGuideToTheGalaxy().quote();
         break;
-      case "LEBOWSKI":
+      case "lebowski":
         quote = faker.lebowski().quote();
         break;
-      case "RICKANDMORTY":
+      case "rickandmorty":
         quote = faker.rickAndMorty().quote();
         break;
       default:

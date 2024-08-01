@@ -8,9 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @KubernetesApplication(ports = @Port(name = "web", containerPort = 8080), envVars = @Env(name = "QUOTE_SERVICE", value = "HITCHHIKER"))
-public class ServiceReactiveApplication {
+public class QuotesServiceApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(ServiceReactiveApplication.class, args);
+    SpringApplication.run(QuotesServiceApplication.class, args);
   }
 }
+ 

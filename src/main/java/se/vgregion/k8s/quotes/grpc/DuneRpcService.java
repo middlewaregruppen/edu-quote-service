@@ -9,8 +9,8 @@ import net.devh.boot.grpc.server.service.GrpcService;
 import java.util.stream.Stream;
 
 import io.grpc.stub.StreamObserver;
-import io.kong.developer.quoteservice.QuoteMessage;
-import io.kong.developer.quoteservice.QuoteServiceGrpc;
+import se.vgregion.k8s.quotes.QuoteMessage; // Come from the proto folder
+import se.vgregion.k8s.quotes.QuoteServiceGrpc; // Come from the proto folder
 import lombok.RequiredArgsConstructor;
 
 @GrpcService

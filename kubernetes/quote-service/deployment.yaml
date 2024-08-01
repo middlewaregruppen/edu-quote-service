@@ -1,30 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hitchhikers-quote-service
+  name: ${QUOTES_SOURCE}-quote-service
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
   labels:
-    app.kubernetes.io/version: 0.0.1
-    app.kubernetes.io/name: hitchhikers-quote-service
+    app.kubernetes.io/name: ${QUOTES_SOURCE}-quote-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/version: 0.0.1
-      app.kubernetes.io/name: hitchhikers-quote-service
+      app.kubernetes.io/name: ${QUOTES_SOURCE}-quote-service
   template:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
       labels:
-        app.kubernetes.io/version: 0.0.1
-        app.kubernetes.io/name: hitchhikers-quote-service
+        app.kubernetes.io/name: ${QUOTES_SOURCE}-quote-service
     spec:
       containers:
-        - name: hitchhikers-quote-service
-          image: harbor.vgregion.se/education/quotes-service:0.0.1-johro35
-          imagePullPolicy: IfNotPresent
+        - name: ${QUOTES_SOURCE}-quote-service
+          image: harbor.vgregion.se/education/quotes-service:0.0.1
+          imagePullPolicy: Always
           resources: {}
           ports:
             - containerPort: 8080
@@ -36,4 +33,4 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: QUOTE_SERVICE
-              value: HITCHHIKER
+              value: "${QUOTES_SOURCE}"
