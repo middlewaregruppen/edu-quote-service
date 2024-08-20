@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ${QUOTES_SOURCE}-quote-service
-  annotations:
-    app.dekorate.io/vcs-url: <<unknown>>
   labels:
     app.kubernetes.io/name: ${QUOTES_SOURCE}-quote-service
 spec:
@@ -13,8 +11,6 @@ spec:
       app.kubernetes.io/name: ${QUOTES_SOURCE}-quote-service
   template:
     metadata:
-      annotations:
-        app.dekorate.io/vcs-url: <<unknown>>
       labels:
         app.kubernetes.io/name: ${QUOTES_SOURCE}-quote-service
     spec:

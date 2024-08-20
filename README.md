@@ -20,11 +20,14 @@ VGR Harbor registry so that we can use it later in our Kubernetes cluster.
 ```bash
 VGR_USER=johro35
 export VGR_USER  # So it can be used by kustomize later
+
 IMAGE_NAME=harbor.vgregion.se/education/quotes-service:0.0.1-$VGR_USER
 
-./gradlew bootBuildImage --imageName $IMAGE_NAME    #<1>
+# Build the Docker image - if on Mac M1
+docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGE_NAME --push .
 
-docker push $IMAGE_NAME   #<2>
+# Build the Docker image - if NOT on Mac M1
+docker build -t $IMAGE_NAME --push .
 
 docker run -d -p 8080:8080 $IMAGE_NAME    #<3>
 docker run -d -p 6565:6565 -e GRPC_ENABLED=true $IMAGE_NAME    #<4>
@@ -83,9 +86,9 @@ For example, we will change the value of the `QUOTES_SOURCE` env var to `chuck`
 to get Chuck Norris quotes and deploy the application.
 
 ```bash
-export QUOTES_SOURCE=chuck
-# Deploy the Chuck Norris quotes service
-kustomize build kubernetes/quote-service | envsubst | kubectl apply -f -
+export QUOTES_SOURCE=hitchhiker
+# Deploy the Hitchhikers Guide quotes service
+kustomize build k8s | envsubst | kubectl apply -f -
 
 kubectl get ing -A -w       # Watch to see the external IP appear, then the ingress is ready Ctrl-C to exit wait mode
 ```

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${QUOTES_SOURCE}-ingress
+  annotations:
+    dns-managed-by/infoblox-dns-webhook: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: ${QUOTES_SOURCE}-edu-${VGR_USER}.k8s.vgregion.se
+      http:
+        paths:
+          - path: /quote
+            pathType: Prefix
+            backend:
+              service:
+                name: ${QUOTES_SOURCE}-quote-service
+                port:
+                  number: 80
+  # tls:
+  #   - hosts:
+  #       - ${QUOTES_SOURCE}-edu-${VGR_USER}.k8s.vgregion.se

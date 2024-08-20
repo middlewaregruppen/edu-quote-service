@@ -1,15 +1,16 @@
 package se.vgregion.k8s.quotes.rest;
 
-import se.vgregion.k8s.quotes.common.QuoteService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import se.vgregion.k8s.quotes.common.QuoteService;
 
 @RestController
+@CrossOrigin(origins = "https://quotes-frontend-edu-johro35.k8s.vgregion.se")
 @RequiredArgsConstructor
 class QuoteEndpoint {
 
