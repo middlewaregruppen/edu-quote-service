@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: ${QUOTES_SOURCE}-edu-${VGR_USER}.k8s.vgregion.se
+    - host: ${QUOTES_SOURCE}-edu-${USER}.local.me
       http:
         paths:
           - path: /quote
@@ -18,6 +18,6 @@ spec:
                 name: ${QUOTES_SOURCE}-quote-service
                 port:
                   number: 80
-  # tls:
-  #   - hosts:
-  #       - ${QUOTES_SOURCE}-edu-${VGR_USER}.k8s.vgregion.se
+  tls:
+    - hosts:
+        - ${QUOTES_SOURCE}-edu-${USER}.local.me
