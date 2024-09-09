@@ -7,6 +7,6 @@ resources:
   - ingress.yaml
 
 images:
-  - name: harbor.vgregion.se/education/quotes-service
-    newName: harbor.vgregion.se/education/quotes-service
+  - name: crackitty/quote-service
+    newName: crackitty/quote-service
     newTag: 0.0.1

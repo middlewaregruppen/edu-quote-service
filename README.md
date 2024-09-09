@@ -11,17 +11,13 @@
 ## Building the Application (optional)
 
 Fist we need to build our application, create a Docker image and push it to the
-VGR Harbor registry so that we can use it later in our Kubernetes cluster.
-
-> Note: There is already a Docker image for version `0.0.1` of this application
-> in the VGR Harbor registry, so you can skip this step if you want to use that
-> image.
+DockerHub registry so that we can use it later in our Kubernetes cluster.
 
 ```bash
-VGR_USER=johro35
-export VGR_USER  # So it can be used by kustomize later
+USER=crackitty
+export USER  # So it can be used by kustomize later
 
-IMAGE_NAME=harbor.vgregion.se/education/quotes-service:0.0.1-$VGR_USER
+IMAGE_NAME=$USER/quotes-service:0.0.1
 
 # Build the Docker image - if on Mac M1
 docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGE_NAME --push .
@@ -54,11 +50,11 @@ from `The Big Lebowski`.
 ```bash
 export QUOTES_SOURCE=hitchhikers
 # Deploy the Hitchhikers Guide quotes service
-kustomize build kubernetes/quote-service | envsubst | kubectl apply -n $VGR_USER -f - # <5>
+kustomize build k8s | envsubst | kubectl apply -n $USER -f - # <5>
 
 export QUOTES_SOURCE=lebowski
 # Deploy the Big Lebowski quotes service
-kustomize build kubernetes/quote-service | envsubst | kubectl apply -n $VGR_USER -f - # <6>
+kustomize build k8s | envsubst | kubectl apply -n $USER -f - # <6>
 
 # Watch to see the external IP appear, then the ingress is ready Ctrl-C to exit wait mode
 kubectl get ing -A -w

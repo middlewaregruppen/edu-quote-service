@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ${QUOTES_SOURCE}-quote-service
-          image: harbor.vgregion.se/education/quotes-service:0.0.1
+          image: crackitty/quotes-service
           imagePullPolicy: Always
           resources: {}
           ports:
