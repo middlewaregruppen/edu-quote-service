@@ -8,8 +8,8 @@ the Faker API to generate random quotes.
 To build the Docker image, run the following command:
 
 ```bash
-docker build -t harbor.vgregion.se/demo/quote-service:1.0.0 . --push
+docker build -t ghcr.io/middlewaregruppen/quote-service:1.0.0 . --push
 
 # If you're on a Mac M1 or M2, then
-docker buildx build --platform linux/amd64,linux/arm64 -t harbor.vgregion.se/demo/quote-service:1.0.0 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/middlewaregruppen/quote-service:1.0.0 --push .
 ```
