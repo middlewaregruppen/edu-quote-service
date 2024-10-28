@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- Console appender to print logs to standard output -->
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- <appender name="Loki" class="com.github.loki4j.logback.Loki4jAppender">
+    <http>
+      <url>http://loki.infra-monitoring.svc.cluster.local:3100/loki/api/v1/push</url>
+    </http>
+    <format>
+      <label>
+        <pattern>app=${name},host=${HOSTNAME},level=%level</pattern>
+        <readMarkers>true</readMarkers>
+      </label>
+      <message>
+        <pattern>
+          { "timestamp": %d{yyyy-MM-dd HH:mm:ss}, "level":"%level", "class":"%logger{36}",
+          "thread":"%thread", "message": "%message",
+          "requestId": "%X{X-Request-ID}" }
+        </pattern>
+      </message>
+    </format>
+  </appender> -->
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE" />
+    <!-- <appender-ref ref="Loki" /> -->
+  </root>
+</configuration>

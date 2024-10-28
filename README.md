@@ -1,90 +1,15 @@
-# Reactive Quotes Service using Spring WebFlux and Faker
+# Random Quote Generator Service
 
-## Prerequisites
+This is a simple service that generates random quotes. It is implemented using
+the Faker API to generate random quotes.
 
-- Docker
-- Java 11
-- kubectl (Kubernetes CLI)
-- kustomize (Kubernetes configuration management tool)
-- envsubst (Linux command line tool)
+## Building the Docker image
 
-## Building the Application (optional)
-
-Fist we need to build our application, create a Docker image and push it to the
-DockerHub registry so that we can use it later in our Kubernetes cluster.
+To build the Docker image, run the following command:
 
 ```bash
-USER=crackitty
-export USER  # So it can be used by kustomize later
+docker build -t harbor.vgregion.se/demo/quote-service:1.0.0 . --push
 
-IMAGE_NAME=$USER/quotes-service:0.0.1
-
-# Build the Docker image - if on Mac M1
-docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGE_NAME --push .
-
-# Build the Docker image - if NOT on Mac M1
-docker build -t $IMAGE_NAME --push .
-
-docker run -d -p 8080:8080 $IMAGE_NAME    #<3>
-docker run -d -p 6565:6565 -e GRPC_ENABLED=true $IMAGE_NAME    #<4>
-```
-
-1. Build an image.
-2. Push an image to Docker Hub.
-3. Run microservice app locally.
-4. Run gRPC service locally.
-
-## Deploying the Application to Kubernetes
-
-We will deploy two flavours of the application to Kubernetes, one that will get
-quotes from `The Hitchhiker's Guide to the Galaxy` and another that will get quotes
-from `The Big Lebowski`.
-
-> Note: We are using some ENV variable substitution so that we can reuse the same
-> manifests for both deployments. This is why we are using `envsubst` in the
-> commands below.
-
-> Note: Make sure to run these commands when connected to the education cluster
-> and also in your own namespace
-
-```bash
-export QUOTES_SOURCE=hitchhikers
-# Deploy the Hitchhikers Guide quotes service
-kustomize build k8s | envsubst | kubectl apply -n $USER -f - # <5>
-
-export QUOTES_SOURCE=lebowski
-# Deploy the Big Lebowski quotes service
-kustomize build k8s | envsubst | kubectl apply -n $USER -f - # <6>
-
-# Watch to see the external IP appear, then the ingress is ready Ctrl-C to exit wait mode
-kubectl get ing -A -w
-```
-
-<5> Deploy apps, services, ingress for The Hitchhikers Guide quotes service.
-<6> Deploy apps, services, ingress for The Big Lebowski quotes service.
-
-## Generic version
-
-We can also deploy other versions of the application that will get quotes from
-one of the other sources available. This also uses the `QUOTES_SOURCE` environment
-variable to indicate which quotes service to install.
-
-You can deploy any of the following quptes sources by setting the `ENV` var
-`QUOTES_SOURCE` to one of the following values:
-
-- `chuck` - Chuck Norris quotes
-- `hobbit` - The Hobbit quotes
-- `hitchhiker` - The Hitchhiker's Guide to the Galaxy quotes
-- `lebowski` - The Big Lebowski quotes
-- `rickandmorty` - Rick and Morty quotes
-
-For example, we will change the value of the `QUOTES_SOURCE` env var to `chuck`
-to get Chuck Norris quotes and deploy the application.
-
-```bash
-export QUOTES_SOURCE=hitchhiker
-# Deploy the Hitchhikers Guide quotes service
-kustomize build k8s | envsubst | kubectl apply -f -
-
-kubectl get ing -A -w       # Watch to see the external IP appear, then the ingress is ready Ctrl-C to exit wait mode
+# If you're on a Mac M1 or M2, then
+docker buildx build --platform linux/amd64,linux/arm64 -t harbor.vgregion.se/demo/quote-service:1.0.0 --push .
 ```
