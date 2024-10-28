@@ -31,7 +31,7 @@ Well... you will be rewarded with random quotes from the following films/tv seri
 We also expose an endpoint for scraping Prometheus metrics via the Actuator, so
 if you go to:
 
-[http://<your-host></your-host>:8080/actuator/prometheus](http://[your-host]:8080/actuator/prometheus)
+`http://your-host:8080/actuator/prometheus`
 
 You will get the metrics in Prometheus format.
 
