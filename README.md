@@ -1,4 +1,4 @@
-# Random Quote Generator Service
+# 🪴 Random Quote Generator Service
 
 This is a simple service that generates random quotes. It is implemented using
 the Faker API to generate random quotes.
