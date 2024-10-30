@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- Parent POM - defines default settings and dependencies -->
+  <groupId>com.example</groupId>
+  <artifactId>quote-service</artifactId>
+  <version>1.0.1</version>
+
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -12,29 +14,23 @@
     <relativePath />
   </parent>
 
-  <!-- Project information -->
-  <groupId>com.example</groupId>
-  <artifactId>quote-service</artifactId>
-  <version>1.0.0</version>
-
-  <name>quote-service</name>
-  <description>Quote Service with OpenTelemetry</description>
-
-  <!-- Java version and OpenTelemetry version -->
   <properties>
     <java.version>11</java.version>
     <opentelemetry.version>1.15.0</opentelemetry.version>
   </properties>
 
-  <!-- Project dependencies -->
   <dependencies>
-    <!-- Spring Boot Web starter - includes everything needed for web development -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
-    <!-- JavaFaker for generating random quotes -->
     <dependency>
       <groupId>com.github.javafaker</groupId>
       <artifactId>javafaker</artifactId>
@@ -52,30 +48,33 @@
     </dependency>
 
     <dependency>
-      <groupId>com.github.loki4j</groupId>
-      <artifactId>loki-logback-appender</artifactId>
-      <version>1.4.1</version>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>net.logstash.logback</groupId>
+      <artifactId>logstash-logback-encoder</artifactId>
+      <version>6.6</version>
     </dependency>
 
   </dependencies>
 
-  <!-- Build configuration -->
   <build>
     <plugins>
-      <!-- Spring Boot Maven plugin - for building executable JARs -->
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>3.1.0</version> <!-- Adjust to match your Spring Boot version -->
+        <version>3.1.0</version>
         <executions>
           <execution>
             <goals>
-              <goal>repackage</goal> <!-- Makes it easy to create executable JARs -->
+              <goal>repackage</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
-
     </plugins>
   </build>
 </project>
