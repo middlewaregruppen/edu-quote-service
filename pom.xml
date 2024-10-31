@@ -4,6 +4,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <!-- Project information -->
+  <groupId>com.example</groupId>
+  <artifactId>quote-service</artifactId>
+  <version>1.0.0</version>
+
   <!-- Parent POM - defines default settings and dependencies -->
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -11,11 +16,6 @@
     <version>2.6.3</version>
     <relativePath />
   </parent>
-
-  <!-- Project information -->
-  <groupId>com.example</groupId>
-  <artifactId>quote-service</artifactId>
-  <version>1.0.0</version>
 
   <name>quote-service</name>
   <description>Quote Service with OpenTelemetry</description>
