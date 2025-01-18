@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote-service
+  labels:
+    app: quote-service
+spec:
+  selector:
+    matchLabels:
+      app: quote-service
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: quote-service
+    spec:
+      containers:
+        - name: quote-service
+          image: ghcr.io/middlewaregruppen/quote-service:1.0.0
+          resources: {}
+          env:
+            - name: COLLECTOR_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: quote-service-config
+                  key: collector-url
+            - name: MOVIEDB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: quote-service-config
+                  key: moviedb-url
+          ports:
+            - name: web
+              containerPort: 8001
