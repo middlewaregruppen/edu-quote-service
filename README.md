@@ -8,10 +8,10 @@ the Faker API to generate random quotes.
 To build the Docker image, run the following command:
 
 ```bash
-docker build -t ghcr.io/middlewaregruppen/quote-service:1.0.0 . --push
+docker build -t ghcr.io/middlewaregruppen/edu-quote-service:1.0.0 . --push
 
 # If you're on a Mac M1 or M2, then
-docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/middlewaregruppen/quote-service:1.0.0 --push .
+docker buildx build --platform linux/amd64,linux/arm64 -t ghcr.io/middlewaregruppen/edu-quote-service:1.0.0 --push .
 ```
 
 ## So... what wonders await?
@@ -44,3 +44,9 @@ These are:
 - `open_db_connections`: a fake Gauge metric that tracks a value that might increase/decrease
 - `http_requests_total`: A counter that keeps track of the requests processed (resets on restart of the app)
 - `http_errors_total`: A counter that keeps track of the error (resets on restart of the app)
+
+## Requirements
+
+This service relies on having an `otel-collector` and a `my-mdb` service. The
+otel-collector is a standard open-telemetry collector, but the `my-mdb` service
+is another related project that can be found [here](https://github.com/middlewaregruppen/movies-api)
