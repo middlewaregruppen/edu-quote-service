@@ -2,15 +2,23 @@ name: Build Docker Image
 
 on:
   push:
-    branches: ["main"]
-    paths:
-      - "Dockerfile"
-      - "src/**"
+    branches: ["*"]
+    paths-ignore:
+      - ".gitignore"
+      - ".java-version"
+      - "bin/**"
+      - "target/**"
+      - "k8s/**"
+      - "README.md"
   pull_request:
-    branches: ["main"]
-    paths:
-      - "Dockerfile"
-      - "src/**"
+    branches: ["*"]
+    paths-ignore:
+      - ".gitignore"
+      - ".java-version"
+      - "bin/**"
+      - "target/**"
+      - "k8s/**"
+      - "README.md"
 
 env:
   REGISTRY: ghcr.io
