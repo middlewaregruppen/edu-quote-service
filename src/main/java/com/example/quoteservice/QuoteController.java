@@ -42,7 +42,7 @@ public class QuoteController {
         .register(meterRegistry);
   }
 
-  @CrossOrigin(origins = "https://quotes-frontend-demo.me")
+  @CrossOrigin(origins = "https://quotes-frontend-demo.me, https://edu-react-frontend.localdev.me")
   @GetMapping("/quote")
   public ResponseEntity<Quote> getQuote() {
     long start = System.currentTimeMillis();
